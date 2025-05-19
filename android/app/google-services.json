@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "950186778908",
+    "project_id": "coleta-portel",
+    "storage_bucket": "coleta-portel.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:950186778908:android:dfb6be8b549e7a4e069ad9",
+        "android_client_info": {
+          "package_name": "com.example.coleta_portel"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCnC8U-5udYIoo0ZSRhEAtl1NrDajxIfQY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
