@@ -11,7 +11,7 @@ class PasswordField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      controller: controller.passwordCtrl,
+      controller: controller.passwordController,
       obscureText: true,
       decoration: const InputDecoration(
         labelText: 'Senha',
