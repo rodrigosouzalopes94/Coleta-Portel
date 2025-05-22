@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+import 'package:coleta_portel/routes/app_routes.dart';
 import 'package:coleta_portel/presentation/widgets/email_field.dart';
 import 'package:coleta_portel/presentation/widgets/password_field.dart';
-import 'package:flutter/material.dart';
 import 'package:coleta_portel/data/controller/login_controller.dart';
 
 class LoginPage extends StatelessWidget {
@@ -24,8 +25,24 @@ class LoginPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Ação de login
+                loginController.login().then((error) {
+                  if (error == null) {
+                    Navigator.pushReplacementNamed(context, AppRoutes.home);
+                  } else {
+                    ScaffoldMessenger.of(
+                      context,
+                    ).showSnackBar(SnackBar(content: Text(error)));
+                  }
+                });
               },
               child: const Text('Entrar'),
+            ),
+            const SizedBox(height: 12),
+            TextButton(
+              onPressed: () {
+                Navigator.pushNamed(context, AppRoutes.signup);
+              },
+              child: const Text('Criar conta'),
             ),
           ],
         ),
