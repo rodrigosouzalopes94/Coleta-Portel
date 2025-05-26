@@ -22,20 +22,34 @@ class LoginPage extends StatelessWidget {
             const SizedBox(height: 16),
             PasswordField(controller: loginController),
             const SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () {
-                // Ação de login
-                loginController.login().then((error) {
-                  if (error == null) {
-                    Navigator.pushReplacementNamed(context, AppRoutes.home);
-                  } else {
-                    ScaffoldMessenger.of(
-                      context,
-                    ).showSnackBar(SnackBar(content: Text(error)));
-                  }
-                });
+            ValueListenableBuilder<bool>(
+              valueListenable: loginController.isLoading,
+              builder: (context, isLoading, child) {
+                return ElevatedButton(
+                  onPressed:
+                      isLoading
+                          ? null
+                          : () async {
+                            final error = await loginController.login();
+                            if (context.mounted) {
+                              if (error == null) {
+                                Navigator.pushReplacementNamed(
+                                  context,
+                                  AppRoutes.home,
+                                );
+                              } else {
+                                ScaffoldMessenger.of(
+                                  context,
+                                ).showSnackBar(SnackBar(content: Text(error)));
+                              }
+                            }
+                          },
+                  child:
+                      isLoading
+                          ? const CircularProgressIndicator(color: Colors.white)
+                          : const Text('Entrar'),
+                );
               },
-              child: const Text('Entrar'),
             ),
             const SizedBox(height: 12),
             TextButton(

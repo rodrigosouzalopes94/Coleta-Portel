@@ -16,6 +16,8 @@ dependencies:
   google_maps_flutter: ^2.12.2
   cupertino_icons: ^1.0.8
   cloud_firestore: ^4.15.8 
+  geolocator: ^10.1.0
+
 
 dev_dependencies:
   flutter_test:
