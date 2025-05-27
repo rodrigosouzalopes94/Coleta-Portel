@@ -1,16 +1,13 @@
+import 'package:coleta_portel/core/services/auth_service.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class LoginController {
-  // TextControllers para os campos da UI
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
-
-  // Notifier para controlar o loading na UI
   final ValueNotifier<bool> isLoading = ValueNotifier(false);
+  final AuthService _authService = AuthService();
 
-  /// Tenta fazer login; em caso de erro retorna a mensagem de erro,
-  /// caso contrário retorna `null`.
+  /// Tenta fazer login com AuthService
   Future<String?> login() async {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
@@ -21,14 +18,7 @@ class LoginController {
 
     isLoading.value = true;
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
-      return null; // sucesso
-    } on FirebaseAuthException catch (e) {
-      // retorna a mensagem de erro amigável para exibir na UI
-      return e.message ?? 'Erro desconhecido ao fazer login.';
+      return await _authService.signIn(email, password);
     } finally {
       isLoading.value = false;
     }
