@@ -1,18 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class LoginButton extends StatelessWidget {
+class RegisterButton extends StatelessWidget {
   final VoidCallback onPressed;
   final String text;
 
-  const LoginButton({required this.onPressed, required this.text, super.key});
+  const RegisterButton({
+    required this.onPressed,
+    required this.text,
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
+      bottom: 0,
       left: 0,
       right: 0,
-      bottom: 60,
       child: Align(
         alignment: Alignment.center,
         child: SizedBox(
@@ -21,7 +25,8 @@ class LoginButton extends StatelessWidget {
           child: ElevatedButton(
             onPressed: onPressed,
             style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF275190),
+              backgroundColor: Colors.transparent,
+              side: const BorderSide(width: 1, color: Color(0xFF275190)),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
@@ -40,7 +45,7 @@ class LoginButton extends StatelessWidget {
                       fontSize: 23,
                       height: 28 / 23,
                       letterSpacing: 0.2,
-                      color: const Color(0xFFF5F4F0),
+                      color: const Color(0xFF275190),
                     ),
                   ),
                 ),
@@ -54,12 +59,13 @@ class LoginButton extends StatelessWidget {
                     height: 30,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      color: const Color(0xFFF5F4F0).withOpacity(0.2),
+                      // ignore: deprecated_member_use
+                      color: const Color(0xFF275190).withOpacity(0.2),
                     ),
                     child: const Icon(
                       Icons.arrow_forward_ios,
                       size: 16,
-                      color: Color(0xFFF5F4F0),
+                      color: Color(0xFF275190),
                     ),
                   ),
                 ),

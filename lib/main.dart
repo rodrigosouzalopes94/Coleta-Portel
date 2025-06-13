@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Coleta Portel',
       theme: ThemeData(primarySwatch: Colors.green),
-      initialRoute: AppRoutes.login,
+      initialRoute: AppRoutes.start,
       onGenerateRoute: AppRoutes.generateRoute,
       debugShowCheckedModeBanner: false,
     );

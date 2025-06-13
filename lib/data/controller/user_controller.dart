@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:coleta_portel/data/models/signup_model.dart';
+import 'package:coleta_portel/data/models/sign_up_model.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class UserController {
