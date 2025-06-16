@@ -1,16 +1,32 @@
+import 'package:coleta_portel/presentation/widgets/custom_input_field.dart';
 import 'package:flutter/material.dart';
 import 'package:coleta_portel/routes/app_routes.dart';
-import 'package:coleta_portel/presentation/widgets/email_field.dart';
-import 'package:coleta_portel/presentation/widgets/password_field.dart';
 import 'package:coleta_portel/data/controller/login_controller.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    final loginController = LoginController();
+  State<LoginPage> createState() => _LoginPageState();
+}
 
+class _LoginPageState extends State<LoginPage> {
+  late final LoginController loginController;
+
+  @override
+  void initState() {
+    super.initState();
+    loginController = LoginController();
+  }
+
+  @override
+  void dispose() {
+    loginController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: const Text('Login')),
       body: Padding(
@@ -18,9 +34,15 @@ class LoginPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            EmailField(controller: loginController),
+            CustomInputField(
+              controller: loginController.emailController,
+              hint: 'E-mail',
+            ),
             const SizedBox(height: 16),
-            PasswordField(controller: loginController),
+            CustomInputField(
+              controller: loginController.passwordController,
+              hint: 'Senha',
+            ),
             const SizedBox(height: 24),
             ValueListenableBuilder<bool>(
               valueListenable: loginController.isLoading,

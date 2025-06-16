@@ -1,3 +1,4 @@
+import 'package:coleta_portel/data/controller/sign_up_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:coleta_portel/presentation/widgets/login_button.dart';
@@ -8,6 +9,7 @@ import 'package:coleta_portel/data/controller/login_controller.dart';
 
 class StartPage extends StatelessWidget {
   final LoginController loginController = LoginController();
+  final SignUpController signUpController = SignUpController();
 
   StartPage({super.key});
 
