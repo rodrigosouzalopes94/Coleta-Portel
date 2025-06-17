@@ -1,8 +1,8 @@
-import 'package:coleta_portel/data/controller/user_controller.dart';
+import 'package:coleta_portel/data/controller/sign_up_controller.dart';
 import 'package:coleta_portel/data/models/sign_up_model.dart';
 import 'package:coleta_portel/presentation/widgets/custom_input_field.dart';
-import 'package:coleta_portel/routes/app_routes.dart';
 import 'package:coleta_portel/presentation/widgets/register_button.dart';
+import 'package:coleta_portel/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -14,46 +14,72 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
-  final TextEditingController _emailCtrl = TextEditingController();
-  final TextEditingController _cpfCtrl = TextEditingController();
-  final TextEditingController _passwordCtrl = TextEditingController();
-  final UserController _userController = UserController();
+  final _emailCtrl = TextEditingController();
+  final _cpfCtrl = TextEditingController();
+  final _passwordCtrl = TextEditingController();
+  final _confirmPasswordCtrl = TextEditingController();
+
   final _formKey = GlobalKey<FormState>();
+  final SignUpController _signUpController = SignUpController();
 
   bool _loading = false;
-  bool? _isAdmin; // null = nenhum, true = admin, false = coletador
+  bool? _isAdmin;
+
+  @override
+  void dispose() {
+    _emailCtrl.dispose();
+    _cpfCtrl.dispose();
+    _passwordCtrl.dispose();
+    _confirmPasswordCtrl.dispose();
+    super.dispose();
+  }
 
   Future<void> _submit() async {
     if (!_formKey.currentState!.validate() || _isAdmin == null) return;
+
+    if (_passwordCtrl.text != _confirmPasswordCtrl.text) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('As senhas não coincidem')),
+      );
+      return;
+    }
+
     setState(() => _loading = true);
 
     final model = SignUpModel(
       email: _emailCtrl.text.trim(),
       cpf: _cpfCtrl.text.trim(),
       password: _passwordCtrl.text,
-      tipoCadastro: _isAdmin!, // true ou false
+      tipoCadastro: _isAdmin!,
     );
 
-    final error = await _userController.createUser(model);
+    final error = await _signUpController.cadastrarUsuario(model);
+
     setState(() => _loading = false);
 
     if (error == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Cadastro realizado com sucesso!')),
+      );
       Navigator.pushReplacementNamed(context, AppRoutes.home);
     } else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(error)));
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error)));
     }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      appBar: AppBar(
+        leading: BackButton(),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
         child: Form(
           key: _formKey,
           child: Column(
-            mainAxisSize: MainAxisSize.min,
             children: [
               Text(
                 'Cadastro',
@@ -67,6 +93,7 @@ class _SignUpPageState extends State<SignUpPage> {
               CustomInputField(controller: _emailCtrl, hint: 'E-mail'),
               CustomInputField(controller: _cpfCtrl, hint: 'CPF'),
               CustomInputField(controller: _passwordCtrl, hint: 'Senha'),
+              CustomInputField(controller: _confirmPasswordCtrl, hint: 'Confirmar Senha'),
               const SizedBox(height: 20),
               Text(
                 'Eu sou:',
@@ -93,6 +120,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 text: _loading ? 'Carregando...' : 'Cadastrar',
                 onPressed: _loading ? null : _submit,
               ),
+              const SizedBox(height: 20),
             ],
           ),
         ),
