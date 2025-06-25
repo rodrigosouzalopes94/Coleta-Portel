@@ -1,8 +1,8 @@
 import 'package:coleta_portel/data/controller/sign_up_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:coleta_portel/presentation/widgets/login_button.dart';
-import 'package:coleta_portel/presentation/widgets/register_button.dart';
+import 'package:coleta_portel/presentation/widgets/blue_button.dart';
+import 'package:coleta_portel/presentation/widgets/white_button.dart';
 import 'package:coleta_portel/presentation/pages/home/home_page.dart';
 import 'package:coleta_portel/presentation/pages/signup/signup_page.dart';
 import 'package:coleta_portel/data/controller/login_controller.dart';
@@ -42,19 +42,17 @@ class StartPage extends StatelessWidget {
             const SizedBox(height: 40),
 
             // Botão Login
-            LoginButton(
+            BlueButton(
               text: 'Login',
-              onPressed: () {
-                Navigator.push(
+              onPressed: () => Navigator.push(
                   context,
                   MaterialPageRoute(builder: (_) => const HomePage()),
-                );
-              },
+                ),
             ),
             const SizedBox(height: 20),
 
             // Botão Cadastro
-            RegisterButton(
+            WhiteButton(
               text: 'Cadastro',
               onPressed: () {
                 Navigator.push(

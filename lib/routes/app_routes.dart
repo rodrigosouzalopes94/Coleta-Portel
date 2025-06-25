@@ -1,6 +1,5 @@
 import 'package:coleta_portel/presentation/pages/start/start_page.dart';
 import 'package:flutter/material.dart';
-import '../presentation/pages/login/login_page.dart';
 import '../presentation/pages/home/home_page.dart';
 import '../presentation/pages/signup/signup_page.dart';
 

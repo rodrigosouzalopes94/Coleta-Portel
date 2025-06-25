@@ -1,7 +1,7 @@
 import 'package:coleta_portel/data/controller/sign_up_controller.dart';
 import 'package:coleta_portel/data/models/sign_up_model.dart';
+import 'package:coleta_portel/presentation/widgets/blue_button.dart';
 import 'package:coleta_portel/presentation/widgets/custom_input_field.dart';
-import 'package:coleta_portel/presentation/widgets/register_button.dart';
 import 'package:coleta_portel/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -38,9 +38,9 @@ class _SignUpPageState extends State<SignUpPage> {
     if (!_formKey.currentState!.validate() || _isAdmin == null) return;
 
     if (_passwordCtrl.text != _confirmPasswordCtrl.text) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('As senhas não coincidem')),
-      );
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(const SnackBar(content: Text('As senhas não coincidem')));
       return;
     }
 
@@ -63,7 +63,9 @@ class _SignUpPageState extends State<SignUpPage> {
       );
       Navigator.pushReplacementNamed(context, AppRoutes.home);
     } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(error)));
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(error)));
     }
   }
 
@@ -93,7 +95,10 @@ class _SignUpPageState extends State<SignUpPage> {
               CustomInputField(controller: _emailCtrl, hint: 'E-mail'),
               CustomInputField(controller: _cpfCtrl, hint: 'CPF'),
               CustomInputField(controller: _passwordCtrl, hint: 'Senha'),
-              CustomInputField(controller: _confirmPasswordCtrl, hint: 'Confirmar Senha'),
+              CustomInputField(
+                controller: _confirmPasswordCtrl,
+                hint: 'Confirmar Senha',
+              ),
               const SizedBox(height: 20),
               Text(
                 'Eu sou:',
@@ -116,7 +121,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 onChanged: (_) => setState(() => _isAdmin = false),
               ),
               const SizedBox(height: 30),
-              RegisterButton(
+              BlueButton(
                 text: _loading ? 'Carregando...' : 'Cadastrar',
                 onPressed: _loading ? null : _submit,
               ),

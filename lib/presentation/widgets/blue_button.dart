@@ -1,32 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class RegisterButton extends StatelessWidget {
-  final VoidCallback? onPressed;
+class BlueButton extends StatelessWidget {
+  final Future<void> Function()? onPressed;
   final String text;
 
-  const RegisterButton({
-    required this.onPressed,
-    required this.text,
-    super.key,
-  });
+  const BlueButton({required this.onPressed, required this.text, super.key});
 
   @override
   Widget build(BuildContext context) {
     return Positioned(
-      bottom: 0,
       left: 0,
       right: 0,
+      bottom: 60,
       child: Align(
         alignment: Alignment.center,
         child: SizedBox(
           width: 303,
           height: 60,
           child: ElevatedButton(
-            onPressed: onPressed,
+            onPressed: onPressed == null ? null : () => onPressed!(),
             style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent,
-              side: const BorderSide(width: 1, color: Color(0xFF275190)),
+              backgroundColor: const Color(0xFF275190),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(15),
               ),
@@ -35,7 +30,6 @@ class RegisterButton extends StatelessWidget {
             ),
             child: Stack(
               children: [
-                // Texto centralizado
                 Align(
                   alignment: Alignment.center,
                   child: Text(
@@ -45,12 +39,10 @@ class RegisterButton extends StatelessWidget {
                       fontSize: 23,
                       height: 28 / 23,
                       letterSpacing: 0.2,
-                      color: const Color(0xFF275190),
+                      color: const Color(0xFFF5F4F0),
                     ),
                   ),
                 ),
-
-                // Shape no canto direito
                 Positioned(
                   right: 20,
                   top: 15,
@@ -59,13 +51,12 @@ class RegisterButton extends StatelessWidget {
                     height: 30,
                     decoration: BoxDecoration(
                       shape: BoxShape.circle,
-                      // ignore: deprecated_member_use
-                      color: const Color(0xFF275190).withOpacity(0.2),
+                      color: const Color(0xFFF5F4F0).withOpacity(0.2),
                     ),
                     child: const Icon(
                       Icons.arrow_forward_ios,
                       size: 16,
-                      color: Color(0xFF275190),
+                      color: Color(0xFFF5F4F0),
                     ),
                   ),
                 ),
