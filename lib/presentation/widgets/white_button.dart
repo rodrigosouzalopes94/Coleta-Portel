@@ -5,11 +5,7 @@ class WhiteButton extends StatelessWidget {
   final VoidCallback? onPressed;
   final String text;
 
-  const WhiteButton({
-    required this.onPressed,
-    required this.text,
-    super.key,
-  });
+  const WhiteButton({required this.onPressed, required this.text, super.key});
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,4 @@
-import 'package:coleta_portel/presentation/widgets/reset_password_button.dart';
+import 'package:coleta_portel/presentation/widgets/blue_button.dart';
 import 'package:flutter/material.dart';
 import 'package:coleta_portel/data/controller/reset_password_controller.dart';
 
@@ -46,7 +46,7 @@ class _ResetPasswordPageState extends State<ResetPasswordPage> {
               ),
               const SizedBox(height: 24),
               // O botão usa o controller para disparar o reset
-              ResetPasswordButton(controller: _controller),
+              BlueButton(controller: _controller),
             ],
           ),
         ),
