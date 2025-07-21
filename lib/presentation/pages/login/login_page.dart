@@ -53,7 +53,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: BackButton(),
+        leading: const BackButton(),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
@@ -75,29 +75,31 @@ class _LoginPageState extends State<LoginPage> {
               CustomInputField(
                 controller: _loginController.emailController,
                 hint: 'E-mail',
+                margin: EdgeInsets.zero,
               ),
               const SizedBox(height: 20),
-              Stack(
-                alignment: Alignment.centerRight,
-                children: [
-                  CustomInputField(
-                    controller: _loginController.passwordController,
-                    hint: 'Senha',
+              CustomInputField(
+                controller: _loginController.passwordController,
+                hint: 'Senha',
+                obscureText: _obscurePassword,
+                margin: EdgeInsets.zero,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                    size: 22,
+                    color: const Color(0xFF352555),
                   ),
-                  IconButton(
-                    icon: Icon(
-                      _obscurePassword
-                          ? Icons.visibility_off
-                          : Icons.visibility,
-                      color: const Color(0xFF352555),
-                    ),
-                    onPressed: () {
-                      setState(() => _obscurePassword = !_obscurePassword);
-                    },
-                  ),
-                ],
+                  onPressed: () {
+                    setState(() => _obscurePassword = !_obscurePassword);
+                  },
+                ),
               ),
               const SizedBox(height: 10),
+              BlueButton(
+                text: _loading ? 'Entrando...' : 'Entrar',
+                onPressed: _loading ? null : _submit,
+              ),
+              const SizedBox(height: 20),
               WhiteButton(
                 text: 'Esqueceu sua senha?',
                 onPressed: () {
@@ -105,14 +107,9 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
               const SizedBox(height: 30),
-              BlueButton(
-                text: _loading ? 'Entrando...' : 'Entrar',
-                onPressed: _loading ? null : _submit,
-              ),
-              const SizedBox(height: 20),
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.signup);
+                  Navigator.pushNamed(context, AppRoutes.forgotPassword);
                 },
                 child: const Text(
                   'Não tem conta? Cadastre-se',

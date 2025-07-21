@@ -38,7 +38,7 @@ class WhiteButton extends StatelessWidget {
                     text,
                     style: GoogleFonts.quicksand(
                       fontWeight: FontWeight.w700,
-                      fontSize: 23,
+                      fontSize: 20,
                       height: 28 / 23,
                       letterSpacing: 0.2,
                       color: const Color(0xFF275190),
