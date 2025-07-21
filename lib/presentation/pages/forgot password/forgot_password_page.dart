@@ -67,37 +67,41 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFEDEDED),
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        leading: const BackButton(),
+      ),
       body: SafeArea(
-        child: Form(
-          key: _formKey,
-          child: Stack(
-            children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  const SizedBox(height: 60),
-                  Text(
-                    'Redefinir Senha',
-                    style: GoogleFonts.quicksand(
-                      fontSize: 24,
-                      fontWeight: FontWeight.bold,
-                      color: const Color(0xFF352555),
-                    ),
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                Text(
+                  'Redefinir Senha',
+                  style: GoogleFonts.quicksand(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: const Color(0xFF352555),
                   ),
-                  const SizedBox(height: 20),
-                  CustomInputField(
-                    hint: 'Digite seu e‑mail',
-                    controller: _resetPasswordController.emailController,
-                  ),
-                ],
-              ),
-              if (_loading) const Center(child: CircularProgressIndicator()),
-              if (!_loading)
-                BlueButton(
-                  text: 'Enviar e‑mail',
-                  onPressed: _handleResetPassword,
                 ),
-            ],
+                const SizedBox(height: 40),
+                CustomInputField(
+                  hint: 'Digite seu e‑mail',
+                  controller: _resetPasswordController.emailController,
+                ),
+                const SizedBox(height: 30),
+                if (_loading)
+                  const CircularProgressIndicator()
+                else
+                  BlueButton(
+                    text: 'Enviar e‑mail',
+                    onPressed: _handleResetPassword,
+                  ),
+              ],
+            ),
           ),
         ),
       ),

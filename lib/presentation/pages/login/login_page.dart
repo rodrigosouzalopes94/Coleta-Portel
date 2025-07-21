@@ -41,7 +41,7 @@ class _LoginPageState extends State<LoginPage> {
     setState(() => _loading = false);
 
     if (error == null) {
-      Navigator.pushReplacementNamed(context, AppRoutes.login);
+      Navigator.pushReplacementNamed(context, AppRoutes.start);
     } else {
       ScaffoldMessenger.of(
         context,
@@ -103,13 +103,13 @@ class _LoginPageState extends State<LoginPage> {
               WhiteButton(
                 text: 'Esqueceu sua senha?',
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.login);
+                  Navigator.pushNamed(context, AppRoutes.forgotPassword);
                 },
               ),
               const SizedBox(height: 30),
               TextButton(
                 onPressed: () {
-                  Navigator.pushNamed(context, AppRoutes.forgotPassword);
+                  Navigator.pushNamed(context, AppRoutes.signup);
                 },
                 child: const Text(
                   'Não tem conta? Cadastre-se',
