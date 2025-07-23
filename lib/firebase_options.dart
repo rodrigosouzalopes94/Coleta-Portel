@@ -74,4 +74,5 @@ class DefaultFirebaseOptions {
     authDomain: 'coleta-portel.firebaseapp.com',
     storageBucket: 'coleta-portel.firebasestorage.app',
   );
+
 }

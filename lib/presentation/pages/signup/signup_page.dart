@@ -58,10 +58,26 @@ class _SignUpPageState extends State<SignUpPage> {
     setState(() => _loading = false);
 
     if (error == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Cadastro realizado com sucesso!')),
+      showDialog(
+        context: context,
+        builder:
+            (context) => AlertDialog(
+              title: const Text('Sucesso!'),
+              content: const Text('Cadastro realizado com sucesso.'),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(context).pop(); // fecha o diálogo
+                    Navigator.pushReplacementNamed(
+                      context,
+                      AppRoutes.forgotPassword,
+                    ); // redireciona para home
+                  },
+                  child: const Text('Ok'),
+                ),
+              ],
+            ),
       );
-      Navigator.pushReplacementNamed(context, AppRoutes.login);
     } else {
       ScaffoldMessenger.of(
         context,
