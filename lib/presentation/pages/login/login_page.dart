@@ -1,5 +1,6 @@
 import 'package:coleta_portel/data/controller/login_controller.dart';
 import 'package:coleta_portel/presentation/widgets/blue_button.dart';
+import 'package:coleta_portel/presentation/widgets/confirm_alert_dialog.dart';
 import 'package:coleta_portel/presentation/widgets/custom_input_field.dart';
 import 'package:coleta_portel/presentation/widgets/white_button.dart';
 import 'package:coleta_portel/routes/app_routes.dart';
@@ -41,7 +42,17 @@ class _LoginPageState extends State<LoginPage> {
     setState(() => _loading = false);
 
     if (error == null) {
-      Navigator.pushReplacementNamed(context, AppRoutes.start);
+      showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder:
+            (_) => ConfirmAlertDialog(
+              onAutoRedirect: () {
+                Navigator.pop(context); // Fecha o diálogo
+                Navigator.pushReplacementNamed(context, AppRoutes.start);
+              },
+            ),
+      );
     } else {
       ScaffoldMessenger.of(
         context,

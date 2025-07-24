@@ -8,7 +8,8 @@ class AppRoutes {
   static const String start = '/start';
   static const String login = '/login';
   static const String signup = '/signup';
-  static const String forgotPassword = '/forgotpassword'; // nova rota
+  static const String forgotPassword = '/forgotpassword';
+  static const String AdminDashboard = '/admindashboard';
 
   static Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
@@ -20,6 +21,8 @@ class AppRoutes {
         return MaterialPageRoute(builder: (_) => const LoginPage());
       case forgotPassword:
         return MaterialPageRoute(builder: (_) => const ForgotPasswordPage());
+      case AdminDashboard:
+        return MaterialPageRoute(builder: (_) => const AdminDashboardPage());
       default:
         return MaterialPageRoute(
           builder:
