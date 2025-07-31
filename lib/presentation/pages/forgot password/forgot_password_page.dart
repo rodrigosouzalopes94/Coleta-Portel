@@ -80,7 +80,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
             child: Column(
               children: [
                 Text(
-                  'Redefinir Senha',
+                  'Esqueceu sua senha?',
                   style: GoogleFonts.quicksand(
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
@@ -89,7 +89,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                 ),
                 const SizedBox(height: 40),
                 CustomInputField(
-                  hint: 'Digite seu e‑mail',
+                  hint: 'E-mail ou Login',
                   controller: _resetPasswordController.emailController,
                 ),
                 const SizedBox(height: 30),
@@ -97,7 +97,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
                   const CircularProgressIndicator()
                 else
                   BlueButton(
-                    text: 'Enviar e‑mail',
+                    text: 'Recuperar senha',
                     onPressed: _handleResetPassword,
                   ),
               ],

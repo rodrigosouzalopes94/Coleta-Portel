@@ -7,13 +7,12 @@ class LoginController {
   final ValueNotifier<bool> isLoading = ValueNotifier(false);
   final AuthService _authService = AuthService();
 
-  /// Tenta fazer login com AuthService
-  Future<String?> login() async {
+  Future<Map<String, dynamic>?> login() async {
     final email = emailController.text.trim();
     final password = passwordController.text.trim();
 
     if (email.isEmpty || password.isEmpty) {
-      return 'E‑mail e senha não podem ficar vazios.';
+      return {'error': 'E‑mail e senha não podem ficar vazios.'};
     }
 
     isLoading.value = true;

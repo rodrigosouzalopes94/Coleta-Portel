@@ -24,6 +24,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
   bool _loading = false;
   bool? _isAdmin;
+  bool _obscurePassword = true;
+  bool _obscureConfirmPassword = true;
 
   @override
   void dispose() {
@@ -67,11 +69,11 @@ class _SignUpPageState extends State<SignUpPage> {
               actions: [
                 TextButton(
                   onPressed: () {
-                    Navigator.of(context).pop(); // fecha o diálogo
+                    Navigator.of(context).pop();
                     Navigator.pushReplacementNamed(
                       context,
                       AppRoutes.forgotPassword,
-                    ); // redireciona para home
+                    );
                   },
                   child: const Text('Ok'),
                 ),
@@ -110,10 +112,39 @@ class _SignUpPageState extends State<SignUpPage> {
               const SizedBox(height: 20),
               CustomInputField(controller: _emailCtrl, hint: 'E-mail'),
               CustomInputField(controller: _cpfCtrl, hint: 'CPF'),
-              CustomInputField(controller: _passwordCtrl, hint: 'Senha'),
+              CustomInputField(
+                controller: _passwordCtrl,
+                hint: 'Senha',
+                obscureText: _obscurePassword,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscurePassword ? Icons.visibility_off : Icons.visibility,
+                    size: 22,
+                    color: const Color(0xFF352555),
+                  ),
+                  onPressed: () {
+                    setState(() => _obscurePassword = !_obscurePassword);
+                  },
+                ),
+              ),
               CustomInputField(
                 controller: _confirmPasswordCtrl,
                 hint: 'Confirmar Senha',
+                obscureText: _obscureConfirmPassword,
+                suffixIcon: IconButton(
+                  icon: Icon(
+                    _obscureConfirmPassword
+                        ? Icons.visibility_off
+                        : Icons.visibility,
+                    size: 22,
+                    color: const Color(0xFF352555),
+                  ),
+                  onPressed: () {
+                    setState(
+                      () => _obscureConfirmPassword = !_obscureConfirmPassword,
+                    );
+                  },
+                ),
               ),
               const SizedBox(height: 20),
               Text(

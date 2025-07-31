@@ -37,27 +37,51 @@ class _LoginPageState extends State<LoginPage> {
 
     setState(() => _loading = true);
 
-    final error = await _loginController.login();
+    final result = await _loginController.login();
 
     setState(() => _loading = false);
 
-    if (error == null) {
-      showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder:
-            (_) => ConfirmAlertDialog(
-              onAutoRedirect: () {
-                Navigator.pop(context); // Fecha o diálogo
-                Navigator.pushReplacementNamed(context, AppRoutes.start);
-              },
-            ),
-      );
-    } else {
-      ScaffoldMessenger.of(
-        context,
-      ).showSnackBar(SnackBar(content: Text(error)));
+    if (result == null || result['role'] == null) {
+      _showError('Erro ao obter dados do usuário.');
+      return;
     }
+
+    if (result.containsKey('error')) {
+      _showError(result['error']);
+      return;
+    }
+
+    String route;
+    switch (result['role']) {
+      case 'admin':
+        route = AppRoutes.AdminDashboard;
+        break;
+      case 'collector':
+        route = AppRoutes.CollectorDashboard;
+        break;
+      default:
+        _showError('Permissão desconhecida.');
+        return;
+    }
+
+    // Exibe o diálogo e redireciona
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder:
+          (_) => ConfirmAlertDialog(
+            onAutoRedirect: () {
+              Navigator.pop(context); // Fecha o diálogo
+              Navigator.pushReplacementNamed(context, route);
+            },
+          ),
+    );
+  }
+
+  void _showError(String message) {
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(message)));
   }
 
   @override

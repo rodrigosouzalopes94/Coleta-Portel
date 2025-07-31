@@ -1,5 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
+import 'package:iconify_flutter/iconify_flutter.dart';
+import 'package:iconify_flutter/icons/ic.dart';
 
 class ConfirmAlertDialog extends StatefulWidget {
   final VoidCallback onAutoRedirect;
@@ -27,7 +29,7 @@ class _ConfirmAlertDialogState extends State<ConfirmAlertDialog> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: const [
-            Icon(Icons.check_circle, size: 64, color: Colors.green),
+            Iconify(Ic.round_check_circle, size: 64, color: Colors.green),
             SizedBox(height: 20),
             Text(
               'Seu acesso foi permitido!\nVocê será redirecionado.',
